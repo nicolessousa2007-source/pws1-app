@@ -27,7 +27,7 @@ Route::get('/ola/{nome}/{curso}', function (string $nome, string $curso) {
 });
 
 Route::get('/saudacao/{nome?}', function (?string $nome = null) {
- return 'Bem-vindo, ' . e($nome ?? 'visitante') . '!';
+    return 'Bem-vindo, ' . e($nome ?? 'visitante') . '!';
 });
 
 Route::get('dobro/{numero}', function (int $numero) {
@@ -41,4 +41,8 @@ Route::get('/perfil', function () {
         'curso' => 'DWDM',
         'interesses' => ['Laravel', 'MySQL', 'Php']
     ]);
+});
+
+Route::get('/sobre', function () {
+    return view('sobre');
 });
