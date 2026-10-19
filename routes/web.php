@@ -62,7 +62,7 @@ $eventos = [
 
 
 Route::get('/', function () {
-    return view('index');
+    return view('inicio');
 });
 
 Route::get('/ola', function () {
