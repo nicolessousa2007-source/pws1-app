@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
@@ -9,8 +10,8 @@
 <body>
     <main class="container">
         <p><a href="/" role="button" class="primary">Voltar ao início</a></p>
-        <h1>Eventos @if ($tipo) - {{ ucfirst($tipo) }} @endif</h1>
-
+        <h1>Evento @if ($tipo) - {{ ucfirst($tipo) }} @endif</h1>
+        
         <hr>
 
         <div class="grid">
@@ -18,33 +19,36 @@
                 <p><a href="/eventos">Todos os eventos</a></p>
                 <p><a href="/eventos?disponibilidade=Disponíveis">Disponíveis</a></p>
             </div>
+
             <div>
                 <p><a href="/eventos?tipo=workshop">Workshops</a></p>
                 <p><a href="/eventos?disponibilidade=Esgotados">Esgotados</a></p>
             </div>
+
             <div>
                 <p><a href="/eventos?tipo=palestra">Palestras</a></p>
+                <p><a href="/eventos/proximos">Próximos eventos</a></p>
             </div>
+
             <div>
                 <p><a href="/eventos?tipo=hackathon">Hackathons</a></p>
             </div>
 
         </div>
 
+
         <!-- <nav>
             <a href="/eventos">Todos os eventos</a>
             <a href="/eventos?tipo=workshop">Workshops</a>
             <a href="/eventos?tipo=palestra">Palestras</a>
             <a href="/eventos?tipo=hackathon">Hackathons</a>
-        </nav> -->
+        </nav>
+        <hr>
 
-        <!-- <hr>
-
-        <nav>
+         <nav>
             <a href="/eventos?disponibilidade=Disponíveis">Disponíveis</a>
             <a href="/eventos?disponibilidade=Esgotados">Esgotados</a>
         </nav> -->
-
         <hr>
 
         <table>
@@ -61,6 +65,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td><a href="/eventos/{{ $evento['id'] }}">{{ $evento['titulo'] }}</a></td>
+                        <!-- <td>{{ $evento['data'] }}</td> -->
                         <td>{{ date('d/m/Y', strtotime($evento['data'])) }}</td>
                         <td>
                             @if ($evento['inscritos'] >= $evento['vagas'])

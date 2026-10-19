@@ -52,14 +52,12 @@ $eventos = [
         'id' => 6,
         'titulo' => 'Workshop de desenvolvimento web',
         'tipo' => 'workshop',
-        'data' => '2026-11-15',
+        'data' => '2026-12-10',
         'local' => 'Laboratório 2.01',
         'vagas' => 30,
         'inscritos' => 0,
-    ]
+    ],
 ];
-
-
 
 Route::get('/', function () {
     return view('inicio');
@@ -73,6 +71,18 @@ Route::get('/ola/{nome}', function (string $nome) {
     return "Olá, " . e($nome);
 });
 
+Route::get('/ola/{nome}/{curso}', function (string $nome, string $curso) {
+    return e($nome) . " está no curso de " . e($curso);
+});
+
+Route::get('/saudacao/{nome?}', function (?string $nome = null) { 
+    return 'Bem-vindo, ' . e($nome ?? 'visitante') . '!'; 
+});
+
+Route::get('/dobro/{numero}', function (int $numero) {
+    return 'O dobro de ' . e($numero) . ' é ' . e($numero * 2);
+})->whereNumber('numero');
+
 Route::get('/test', function () {
     return view('test');
 });
@@ -81,29 +91,13 @@ Route::get('/test2', function () {
     return view('test2');
 });
 
-Route::get('/ola/{nome}/{curso}', function (string $nome, string $curso) {
-    return e($nome) . " está no curso " . e($curso);
-});
-
-Route::get('/saudacao/{nome?}', function (?string $nome = null) {
-    return 'Bem-vindo, ' . e($nome ?? 'visitante') . '!';
-});
-
-Route::get('dobro/{numero}', function (int $numero) {
-    return 'O dobro de ' . e($numero) . ' é ' . e($numero *2);
-})->whereNumber('numero');
-
 Route::get('/perfil', function () {
-    return view ('perfil', [
-        'nome' => 'Nicole Sousa',
+    return view('perfil', [
+        'nome' => 'Mário Amorim',
         'ano' => 2,
         'curso' => 'DWDM',
-        'interesses' => ['Laravel', 'MySQL', 'Php']
+        'interesses' => ['Laravel', 'MySQL', 'PHP']
     ]);
-});
-
-Route::get('/sobre', function () {
-    return view('sobre');
 });
 
 // Route::get('/eventos', function () use ($eventos) {
@@ -114,11 +108,10 @@ Route::get('/sobre', function () {
 
 Route::get('/eventos', function () use ($eventos) {
     $tipo = request('tipo');
-    // ver a disponibilidade de vagas por inscritos e mostrar ou disponivel ou indisponvel
     $disponibilidade = request('disponibilidade');
 
     if ($tipo) {
-        $eventos = array_filter($eventos, 
+        $eventos = array_filter($eventos,
             fn ($evento) => $evento['tipo'] === $tipo
         );
     }
@@ -142,19 +135,41 @@ Route::get('/eventos', function () use ($eventos) {
     ]);
 });
 
+Route::get('/eventos/proximos', function () use ($eventos) {
+    $hoje = date('Y-m-d');
+
+    $eventos = array_filter(
+        $eventos,
+        fn ($evento) => $evento['data'] >= $hoje
+    );
+
+    usort(
+        $eventos,
+        fn ($a, $b) => $a['data'] <=> $b['data']
+    );
+
+    return view('eventos.index', [
+        'eventos' => $eventos,
+        'tipo' => null,
+        'disponibilidade' => null,
+    ]);
+});
+
 Route::get('/eventos/{id}', function (int $id) use ($eventos) {
-    //Filtrar o evento pelo id
+    // Filtrar o evento pelo ID
     $evento = null;
 
     foreach ($eventos as $item) {
         if ($item['id'] === $id) {
             $evento = $item;
-        }
+        } 
     }
 
     if ($evento === null) {
         abort(404);
     }
 
-    return view('eventos.show', ['evento' => $evento]);
-})-> whereNumber('id');
+    return view('eventos.show', [
+        'evento' => $evento,
+    ]);
+})->whereNumber('id');
