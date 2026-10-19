@@ -114,6 +114,8 @@ Route::get('/sobre', function () {
 
 Route::get('/eventos', function () use ($eventos) {
     $tipo = request('tipo');
+    // ver a disponibilidade de vagas por inscritos e mostrar ou disponivel ou indisponvel
+    $disponibilidade = request('disponibilidade');
 
     if ($tipo) {
         $eventos = array_filter($eventos, 
@@ -121,9 +123,22 @@ Route::get('/eventos', function () use ($eventos) {
         );
     }
 
+    if ($disponibilidade === 'Esgotados') {
+        $eventos = array_filter(
+            $eventos,
+            fn ($evento) => $evento['inscritos'] >= $evento['vagas']
+        );
+    } elseif ($disponibilidade === 'Disponíveis') {
+        $eventos = array_filter(
+            $eventos,
+            fn ($evento) => $evento['inscritos'] < $evento['vagas']
+        );
+    }
+
     return view('eventos.index', [
         'eventos' => $eventos,
         'tipo' => $tipo,
+        'disponibilidade' => $disponibilidade,
     ]);
 });
 
