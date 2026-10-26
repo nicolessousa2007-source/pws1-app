@@ -27,7 +27,7 @@
     <main class="container mt-5">
         <h1 class="text-dark">{{ config('app.name') }}</h1>
         <p>Workshops, palestras e hackathons do ISLA Gaia.</p>
-        <p><a href="/eventos" class="btn btn-primary">Ver eventos</a></p>
+        <p><a href="{{ route('eventos.index') }}" class="btn btn-primary">Ver eventos</a></p>
     </main>
 </body>
 </html>
