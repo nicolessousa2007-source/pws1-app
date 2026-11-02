@@ -24,3 +24,7 @@ php artisan route:list --except-vendor
 
 # Desafio
 Ao coloar a rota /eventos/{id} sem whereNumber('id') e escrita antes de /eventos/proximos, ao abrir /eventos/proximos dá erro porque o Laravel acha que o id é proximos e como as rotas são lidas de cima para baixo ele encontra primeiro a rota errada.
+
+
+# PL03 Desafio
+A rota '/eventos/tipo/{tipo}' não entra em conflito com '/eventos/{id}' porque a primeira tem três segmentos ('eventos', 'tipo' e o valor de '{tipo}'), enquanto a segunda tem dois ('eventos' e o valor de '{id}'). Além disso, '{id}' só aceita números devido a 'whereNumber('id')'.
