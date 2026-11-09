@@ -22,7 +22,7 @@ a { color: var(--cor); }
 main { padding-top: 1.5rem; padding-bottom: 2rem; min-height: 70vh; }
 
 .grelha { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
-.cartao { background: var(--cor-clara); border-radius: 8px; padding: 1rem; }
+.cartao { background: var(--cinza); border-radius: 8px; padding: 1rem; }
 .cartao h3 { margin: 0.5rem 0; font-size: 1.1rem; }
 .cartao p { margin: 0; color: var(--cinza); }
 .etiqueta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--cor); font-weight: 700; }

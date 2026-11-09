@@ -26,18 +26,13 @@
     <p><a href="{{ route('eventos.index') }}" class="btn btn-primary">Ver eventos</a></p>
 
     <h2>Próximos eventos</h2>
-    <ul>
+    <div class="grelha">
         @forelse ($proximos as $evento)
-            <li>
-                <a href="{{ route('eventos.show', $evento['id']) }}">
-                    {{ $evento['titulo'] }} 
-                </a>
-                {{ date('d/m/Y', strtotime($evento['data'])) }}
-            </li>
+            <x-cartao-evento :evento="$evento"/>
         @empty
-            <li>Não há próximos eventos.</li>
+            <x-alerta tipo="aviso">Ainda não há eventos marcados.</x-alerta>
         @endforelse
-    </ul>
+    </div>
 @endsection
 
 
