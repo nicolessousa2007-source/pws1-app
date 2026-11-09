@@ -3,13 +3,13 @@
 @section('titulo', $evento['titulo'])
 
 @section('conteudo')
-    <p><a href="{{ route('eventos.index') }}" role="button" class="primary">Voltar aos eventos</a></p>
+    <p><a href="{{ route('eventos.index') }}" role="button" class="botao">Voltar aos eventos</a></p>
 
     <h1>{{ $evento['titulo'] }}</h1>
 
     <!-- Só aparece quando não há vagas disponíveis -->
     @if ($evento['inscritos'] >= $evento['vagas'])
-        <p><strong>Este evento está esgotado.</strong></p>
+        <x-alerta tipo="aviso">Este evento está esgotado.</x-alerta>
     @endif
 
     <p><strong>Tipo:</strong> {{ $evento['tipo'] }}</p>
