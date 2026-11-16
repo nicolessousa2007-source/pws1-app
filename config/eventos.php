@@ -25,7 +25,7 @@ return[
         'titulo' => 'Hackathon ISLA 24h',
         'tipo' => 'hackathon',
         'data' => '2026-11-06',
-        'local' => 'Átrio principal',
+        'local' => 'Auditório principal',
         'vagas' => 60,
         'inscritos' => 41,
     ],
