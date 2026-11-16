@@ -48,11 +48,11 @@ class EventoController extends Controller
         //     );
         // }
 
-        // return view('eventos.index', [
-        //     'eventos' => $eventos,
-        //     'tipo' => $tipo,
-        //     'disponibilidade' => $disponibilidade,
-        // ]);
+        return view('eventos.index', [
+            'eventos' => $eventos,
+            'tipo' => $tipo,
+            'disponibilidade' => $disponibilidade,
+        ]);
     }
 
     public function proximos(): view

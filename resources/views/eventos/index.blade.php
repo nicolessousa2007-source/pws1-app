@@ -63,7 +63,6 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td><a href="{{ route('eventos.show', ['id' => $evento->id]) }}">{{ $evento->titulo }}</a></td>
-                            <!-- <td>{{ $evento['data'] }}</td> -->
                             <td>{{ date('d/m/Y', strtotime($evento->data)) }}</td>
                             <td>
                                 @if ($evento->inscritos >= $evento->vagas)
