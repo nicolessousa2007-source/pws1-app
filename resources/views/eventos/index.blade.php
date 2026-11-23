@@ -26,7 +26,9 @@
             </div>
 
             <div>
-                <p><a href="{{ route('eventos.index', ['tipo' => 'hackathon']) }}">Hackathons</a></p>
+                @foreach ($tipos as $tipoFiltro)
+                    <p><a href="{{ route('eventos.index', ['tipo' => $tipoFiltro->slug]) }}">{{ $tipoFiltro->nome }}</a></p>
+                @endforeach
             </div>
 
         </div>
@@ -62,7 +64,7 @@
                     @foreach ($eventos as $evento)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td><a href="{{ route('eventos.show', ['id' => $evento->id]) }}">{{ $evento->titulo }}</a></td>
+                            <td><a href="{{ route('eventos.show', $evento) }}">{{ $evento->titulo }}</a></td>
                             <td>{{ $evento->data->format('d/m/Y') }}</td>
                             <td>
                                 @if ($evento->inscritos >= $evento->vagas)
